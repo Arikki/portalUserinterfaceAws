@@ -17,7 +17,7 @@ export class UpdateProfileService {
         .fromNow()
         .substring(0, 2);
       return this.http
-        .post<Profile>('http://localhost:8081/profile/register', {
+        .post<Profile>('http://profile.portal.com/profile/register', {
           firstName: profile.firstName,
           lastName: profile.lastName,
           dob: profile.dob,
@@ -64,7 +64,7 @@ export class UpdateProfileService {
         .substring(0, 2);
       console.log(profile);
       return this.http
-        .put<Profile>('http://localhost:8081/profile/update', {
+        .put<Profile>('http://profile.portal.com/profile/update', {
           firstName: profile.firstName,
           lastName: profile.lastName,
           dob: profile.dob,
@@ -108,7 +108,7 @@ export class UpdateProfileService {
   }
 
   getBasicDetails(email: string) {
-    return this.http.get('http://localhost:8080/authDetails/' + email).pipe(
+    return this.http.get('http://auth.portal.com/basicDetails/' + email).pipe(
       catchError((errorResp) => {
         let errorMsg = 'An error occured!';
         if (!errorResp.error) {

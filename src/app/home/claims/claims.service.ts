@@ -17,7 +17,7 @@ export class ClaimsService {
 
   submitClaim(email: string, form: NgForm, selectedMember: SelectedMember) {
     return this.http
-      .post<Claim>('http://localhost:8082/claims', {
+      .post<Claim>('http://claims.portal.com/claims', {
         email: email,
         memberId: selectedMember.memberId,
         firstName: selectedMember.firstName,

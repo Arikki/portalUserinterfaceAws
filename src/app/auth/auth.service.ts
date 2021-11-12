@@ -35,7 +35,7 @@ export class AuthService {
     localStorage.setItem('userDetail', JSON.stringify(userDetail));
 
     return this.http
-      .post<AuthResponseData>('http://localhost:8080/signup', {
+      .post<AuthResponseData>('http://auth.portal.com/signup', {
         firstName: form.value.firstName,
         lastName: form.value.lastName,
         dob: form.value.dateOfBirth,
@@ -71,7 +71,7 @@ export class AuthService {
 
   login(form: NgForm) {
     return this.http
-      .post<AuthResponseData>('http://localhost:8080/login', {
+      .post<AuthResponseData>('http://auth.portal.com/login', {
         email: form.value.email,
         password: form.value.password,
       })

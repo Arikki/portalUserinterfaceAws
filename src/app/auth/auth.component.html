@@ -11,7 +11,7 @@
       <input type ="text" id = "lastName" class="form-control" name = "lastName" placeholder="Last Name&#42;" ngModel  *ngIf="isSignUpMode" required/>
       
      
-      <input type = "text" id = "dateOfBirth" class="form-control" name = "dateOfBirth" placeholder="Date Of Birth&#42;" #dateOfBirth="ngModel" onfocus="(this.type='date')"  (blur)="(this.type='text')"   appAgeValidator  ngModel *ngIf="isSignUpMode" required />    
+      <input type = "date" id = "dateOfBirth" class="form-control" name = "dateOfBirth" placeholder="Date Of Birth&#42;" ngModel *ngIf="isSignUpMode" required />    
      
     
       <span class="text-danger" *ngIf="email.invalid && email.touched && email.errors?.pattern">

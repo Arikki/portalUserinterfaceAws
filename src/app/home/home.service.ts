@@ -32,7 +32,7 @@ export class HomeService {
   }
 
   getProfile(email: string) {
-    const url = 'http://localhost:8081/profile/find/' + email;
+    const url = 'http://profile.portal.com/profile/find/' + email;
     return this.http.get<Profile>(url).pipe(
       catchError((errorResp) => {
         let errorMsg = 'An error occured!';
@@ -52,7 +52,7 @@ export class HomeService {
   }
 
   getBasicDetails(email: string) {
-    const url = 'http://localhost:8080/basicDetails/' + email;
+    const url = 'http://auth.portal.com/basicDetails/' + email;
     return this.http.get<Profile>(url).pipe(
       catchError((errorResp) => {
         let errorMsg = 'An error occured!';

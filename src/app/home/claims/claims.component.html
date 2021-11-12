@@ -1,0 +1,30 @@
+<div class="claim-page">
+    <div class="form" >
+      <p><strong>Claim Form</strong></p>
+      <form class="claim-form" #claimForm="ngForm" *ngIf="rcvdProfile" (ngSubmit)="onSubmit(claimForm)" >   
+        <div class="alert alert-danger" *ngIf="isError && !isSubmitted">
+            <p class="text-center">{{error}}</p>
+        </div>
+        <div class ="alert alert-success"  *ngIf="isSubmitted && !isError">
+            <p class="text-center">Submitted Successfully! Claim Number:{{claimDetails.claimNumber}}</p>
+            
+        </div>
+        
+        <select id = "memberId" name = "memebrId" [(ngModel)]="selectedMemberId" style="width:100%" (change)="prePopulate()" required>
+            <option value="undefined" disabled hidden selected>Choose member id</option>
+            <option *ngFor="let item of memberDetails" value = "{{item.memberId}}">{{item.memberId}}</option>
+        </select>
+        
+        <input type="text"  id = "firstName"  class="form-control" name = "firstName" placeholder="First Name"  [value]="selectedFirstName" *ngIf = "showDetails" disabled>
+        
+        <input type="text"  id = "lastName"  class="form-control" name = "lastName" placeholder="Last Name"  [value]="selectedLastName" *ngIf = "showDetails" disabled>
+      
+        <input type="date"  id = "dob"  class="form-control" name = "dob" placeholder="Date of Birth"  [value]="selectedDob" *ngIf = "showDetails" disabled>
+        <input type="text"  id = "providerName"  class="form-control" name = "providerName" placeholder="Provider Name&#42;" *ngIf = "showDetails" ngModel required>
+        <input type="text"  id = "admissionDate"  class="form-control" name = "admissionDate" placeholder="Admission Date&#42;" onfocus="(this.type='date')"  onblur="(this.type='text')" *ngIf = "showDetails" ngModel required >
+        <input type="text"  id = "dischargeDate"  class="form-control" name = "dischargeDate" placeholder="Discharge Date&#42;" onfocus="(this.type='date')"  onblur="(this.type='text')" *ngIf = "showDetails" ngModel required>
+        <input type="text"  id = "amount"  class="form-control" name = "amount" placeholder="Amount&#42;" *ngIf = "showDetails" ngModel required>
+        <button class="btn btn-primary" type ="submit" [disabled] = "!claimForm.valid" *ngIf = "showDetails && !isSubmitted">Submit</button>
+      </form>
+    </div>
+  </div>

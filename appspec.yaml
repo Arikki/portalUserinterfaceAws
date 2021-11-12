@@ -1,0 +1,10 @@
+version: 1.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:us-east-1:575093892725:task-definition/portal-user-interface-task-definition:1"
+        LoadBalancerInfo:
+          ContainerName: "portal-user-interface-container"
+          ContainerPort: "4200"
+        PlatformVersion: "LATEST"

@@ -1,0 +1,69 @@
+<div class="updateProfile-page">
+    <div class="form" >
+      <p><strong>Update/Complete profile Form</strong></p>
+      <form class="updateProfile-form" #registerForm="ngForm" (ngSubmit)="updateProfile()"  *ngIf = "isLoaded" >   
+        <div class="alert alert-danger" *ngIf="isError && !isUpdated">
+            <p class="text-center">{{error}}</p>
+        </div>
+        <div class ="alert alert-success"   *ngIf="isUpdated && !isError">
+            <p class="text-center">Updated SuccessFully!</p>
+            
+        </div>
+        <div class="alert alert-warning" *ngIf="isNewUser && !isUpdated">
+            <strong>Please complete the profile!</strong>
+          </div>
+          <label for= "firstName">First Name:</label>
+          <input type="text"  id = "firstName"  class="form-control" name = "firstName" placeholder="First Name"  [(ngModel)]="rcvdProfile.firstName" disabled>
+          <label for= "lastName">Last Name:</label>
+          <input type="text" class="form-control" id="lastName"  name = "lastName" placeholder="Last Name"   [(ngModel)]="rcvdProfile.lastName" disabled>
+          <label for= "dateOfBirth">Date of Birth:</label>
+          <input type="date" class="form-control" id="dob"  name = "dob" placeholder="Date Of Birth"  [(ngModel)]="rcvdProfile.dob">
+          <label for= "address">Address:</label>
+          <input type="text"  id = "address"  class="form-control" name = "address" placeholder="Address" [(ngModel)]="rcvdProfile.address" required>
+          <label for= "country">Country:</label>
+          <select id = "country" name = "country" [(ngModel)]="rcvdProfile.country" (change)="getStates()" style="width:100%" required>
+            <option *ngFor="let item of countries" value = "{{item.name}}">{{item.name}}</option>
+        </select>
+        <label for= "state">State:</label>
+        <select id = "state" name = "state" [(ngModel)]="rcvdProfile.state" (change)="getDistricts()" style="width:100%" required>
+            <option *ngFor="let item of states" value = "{{item.name}}">{{item.name}}</option>
+        </select> 
+        <label for= "district">District:</label>
+        <select id = "district" name = "district" [(ngModel)]="rcvdProfile.district" style="width:100%" required>
+            <option *ngFor="let item of districts" value = "{{item.name}}">{{item.name}}</option>
+        </select>
+        <label for= "email">Email:</label>
+        <input type="text"  id = "email"  class="form-control" name = "email" placeholder="Email Id"  [(ngModel)]="rcvdProfile.email" disabled> 
+        <span class="text-danger" *ngIf="contactNumber.invalid && contactNumber.touched && contactNumber.errors?.pattern">
+          Phone number must be in 10 digits
+        </span>
+        <label for= "contactNumber">Contact Number:</label>
+        <input type="text"  id = "contactNumber"  class="form-control" name = "contactNumber" placeholder="Contact Number"  [(ngModel)]="rcvdProfile.contactNum" pattern="^\d{10}$" required #contactNumber="ngModel">
+        <span class="text-danger" *ngIf="panCardNum.invalid && panCardNum.touched && panCardNum.errors?.pattern">
+          Pan card number must contain only alphabets and numbers (no spaces and symbols)
+        </span>
+        <label for= "panCardNum">Pan Card Number:</label>
+        <input type="text"  id="panCardNum" class="form-control"  name = "panCardNum" placeholder="Pan Card Number"   [(ngModel)]="rcvdProfile.panCrdNum" #panCardNum="ngModel" pattern="^[a-zA-Z0-9]{12}$" required>
+        <label for= "firstNameDep1">First Name(Dependent1):</label>
+        <input type="text"  id="firstNameDep1" class="form-control"  name = "firstNameDep1" placeholder=" Dependent1's First Name"  [(ngModel)]="rcvdProfile.dependents[0].firstName" [disabled]="!isNewUser" required>
+        <label for= "lastNameDep1">Last Name(Dependent1):</label>
+        <input type="text"  id="lastNameDep1" class="form-control"  name = "lastNameDep1" placeholder=" Dependent1's Last Name"  [(ngModel)]="rcvdProfile.dependents[0].lastName" [disabled]="!isNewUser" required>
+        <label for= "dobDep1">Date of Birth:(Dependent1):</label>
+        <input type="date"  id="dobDep1" class="form-control"  name = "dobDep1" placeholder=" Dependent1's DOB"  [(ngModel)]="rcvdProfile.dependents[0].dob"  required>
+        <label for= "firstNameDep2">First Name(Dependent2):</label>
+        <input type="text"  id="firstNameDep2" class="form-control"  name = "firstNameDep2" placeholder=" Dependent2's First Name"  [(ngModel)]="rcvdProfile.dependents[1].firstName" [disabled]="!isNewUser" required> 
+        <label for= "lastNameDep2">Last Name(Dependent2):</label>
+        <input type="text"  id="lastNameDep2" class="form-control"  name = "lastNameDep2" placeholder=" Dependent2's Last Name"  [(ngModel)]="rcvdProfile.dependents[1].lastName" [disabled]="!isNewUser" required>
+        <label for= "dobDep2">Date of Birth(Dependent2):</label>
+        <input type="date"  id="dobDep2" class="form-control"  name = "dobDep2" placeholder=" Dependent2's DOB"  [(ngModel)]="rcvdProfile.dependents[1].dob" required>
+        <label for= "memberId" *ngIf = "!isNewUser">Member Id:</label>
+        <input type="text"  id="memberId" class="form-control"  name = "memberId" placeholder="Memeber Id" *ngIf = "!isNewUser" [(ngModel)]="rcvdProfile.memberId" disabled>
+        <label for= "memberId1" *ngIf = "!isNewUser">Member Id(Dependent1):</label>
+        <input type="text"  id="memberId1" class="form-control"  name = "memberId1" placeholder="Dependent1's Member Id" *ngIf = "!isNewUser"  [(ngModel)]="rcvdProfile.dependents[0].memberId" disabled>
+        <label for= "memberId2" *ngIf = "!isNewUser">Member Id(Dependent2):</label>
+        <input type="text"  id="memberId2" class="form-control"  name = "memberId2" placeholder=" Dependent2's Member Id" *ngIf = "!isNewUser"  [(ngModel)]="rcvdProfile.dependents[1].memberId" disabled>
+
+        <button class="btn btn-primary" type ="submit" [disabled] = "!registerForm.valid">Update</button>
+      </form>
+    </div>
+  </div>
